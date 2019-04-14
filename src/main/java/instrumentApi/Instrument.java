@@ -21,20 +21,13 @@ public final class Instrument {
 
 	public Instrument(String source, String instrumentCode, LocalDate lastTradingDate, LocalDate deliveryDate,
 			String market, String label, Boolean tradeable) {
-		Objects.requireNonNull(source);
-		Objects.requireNonNull(instrumentCode);
-		Objects.requireNonNull(lastTradingDate);
-		Objects.requireNonNull(deliveryDate);
-		Objects.requireNonNull(market);
-		Objects.requireNonNull(label);
-		Objects.requireNonNull(tradeable);
-		this.source = source;
-		this.instrumentCode = instrumentCode;
-		this.lastTradingDate = lastTradingDate;
-		this.deliveryDate = deliveryDate;
-		this.market = market;
-		this.label = label;
-		this.tradeable = tradeable;
+		this.source = Objects.requireNonNull(source);
+		this.instrumentCode = Objects.requireNonNull(instrumentCode);
+		this.lastTradingDate =Objects.requireNonNull(lastTradingDate);
+		this.deliveryDate = Objects.requireNonNull(deliveryDate);
+		this.market =Objects.requireNonNull(market);
+		this.label = Objects.requireNonNull(label);
+		this.tradeable =Objects.requireNonNull(tradeable);
 	}
 
 	public Instrument(String source, String instrumentCode, LocalDate localDate, LocalDate localDate2, String market,
