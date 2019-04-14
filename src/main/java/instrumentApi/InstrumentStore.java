@@ -15,7 +15,7 @@ public class InstrumentStore {
 			map.putIfAbsent(i.getSource(), new ConcurrentHashMap<String, Instrument>());
 			instrumentMap = map.get(i.getSource());
 		}
-		instrumentMap.putIfAbsent(i.getInstrumentCode(), i);
+		instrumentMap.put(i.getInstrumentCode(), i);
 	}
 
 	public Instrument GetInstrument(String source, String instrumentCode) {
