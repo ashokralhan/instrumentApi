@@ -4,31 +4,42 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-/*
- *  This is main singleton class
- *  You can add instrument to this at present no facility to remove instrument.
- *  You can add rule which will be applied before publishing
+/**
+ * <li>This is main singleton class to be used as API gateway.
+ * <li>You can add instrument through this API.
+ * <li>At present there is no facility to remove instrument but can be added at
+ * request.
+ * <li>If same instrument ( same source and instrument code ) is added it will
+ * replace the existing instrument.
+ * <li>You can add rule which will be applied before publishing. Presently no
+ * facility to remove rules.
+ * <li>For now rules are applied only while publishing in future we can have add
+ * two types of rules while saving the instrument or while publishing
+ * <li>Rules can be applied to selected source or all source
  */
-public class InstrumentAPI {
+public final class InstrumentAPI {
 	/*
-	 * We are not doing lazy initialization so we need not synchronize the get instance
+	 * We are not doing lazy initialization so we need not synchronize the get
+	 * instance
 	 */
 	private InstrumentStore store = new InstrumentStore();
 	private ConcurrentLinkedQueue<MergeRule> rules = new ConcurrentLinkedQueue<MergeRule>();
 	public static final InstrumentAPI INSTANCE = new InstrumentAPI();
 
 	/*
-	 * Private Constructor
+	 * Private Constructor to implement Singleton design pattern
 	 */
 	private InstrumentAPI() {
 
 	}
 
-	/*
-	 * clear all rules and instrument for running different story This is provided
-	 * just for testing and may not be required at all Thread Safety if another
-	 * thread is still working it may continue to work as it will its own copies of
-	 * rules and store or new values but will not throw exception.
+	/**
+	 * <li>Clear all rules and instrument for running different story.
+	 * <li>This is provided just for testing and may not be required at all
+	 * <li>Thread Safety if another thread is still working it may continue to work
+	 * as it will have have new or old copies of rules and instrument
+	 * <li>in that case result may not be correct but will not throw exception or
+	 * deadlock
 	 */
 	public void clearAll() {
 		store = new InstrumentStore();
@@ -62,7 +73,6 @@ public class InstrumentAPI {
 		if (i != null) {
 			for (MergeRule rule : rules)
 				i = rule.apply(i);
-
 			return i.toString();
 		}
 		return null;

@@ -16,4 +16,10 @@ public class InstrumentTest {
 		assertEquals("| 15-03-2018 | 17-03-2018 | PB | Lead 13 March 2018 | TRUE |", i.toString());
 	}
 
+	@Test(expected = NullPointerException.class)
+	public void testFailedInstrument() {
+		Instrument i = new Instrument(null, null, null, null, null, null);
+		assertEquals(Boolean.TRUE, i.getTradeable());
+		assertEquals("| 15-03-2018 | 17-03-2018 | PB | Lead 13 March 2018 | TRUE |", i.toString());
+	}
 }

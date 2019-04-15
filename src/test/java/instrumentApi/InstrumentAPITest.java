@@ -5,14 +5,20 @@ import static org.junit.Assert.*;
 import java.time.LocalDate;
 import java.util.Collections;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class InstrumentAPITest {
+	
+	@Before
+	public void setUp() throws Exception {
+		InstrumentAPI api = InstrumentAPI.INSTANCE;
+		api.clearAll();
+	}
 
 	@Test
 	public void testStory1() {
 		InstrumentAPI api = InstrumentAPI.INSTANCE;
-		api.clearAll();
 		api.RegisterRule(new TradingDateRule(Collections.emptyList()));
 		api.RegisterRule(new TradeableRule(Collections.emptyList()));
 		api.AddInstrument(new Instrument("LME", "PB_03_2018", LocalDate.of(2018, 3, 15), LocalDate.of(2018, 3, 17),
@@ -25,7 +31,6 @@ public class InstrumentAPITest {
 	@Test
 	public void testStory21() {
 		InstrumentAPI api = InstrumentAPI.INSTANCE;
-		api.clearAll();
 		api.RegisterRule(new TradingDateRule(Collections.emptyList()));
 		api.RegisterRule(new TradeableRule(Collections.emptyList()));
 		api.AddInstrument(new Instrument("LME", "PB_03_2018", LocalDate.of(2018, 3, 15), LocalDate.of(2018, 3, 17),
@@ -40,7 +45,6 @@ public class InstrumentAPITest {
 	@Test
 	public void testStory22() {
 		InstrumentAPI api = InstrumentAPI.INSTANCE;
-		api.clearAll();
 		api.RegisterRule(new TradingDateRule(Collections.emptyList()));
 		api.RegisterRule(new TradeableRule(Collections.emptyList()));
 		api.AddInstrument(new Instrument("LME", "PB_03_2018", LocalDate.of(2018, 3, 15), LocalDate.of(2018, 3, 17),
@@ -55,7 +59,6 @@ public class InstrumentAPITest {
 	@Test
 	public void testInstrumentLME() {
 		InstrumentAPI api = InstrumentAPI.INSTANCE;
-		api.clearAll();
 		api.AddInstrument("LME", "PB_03_2018", LocalDate.of(2018, 3, 15), LocalDate.of(2018, 3, 17), "LME_PB",
 				"Lead 13 March 2018");
 		Instrument i = api.GetInstrument("LME", "PB_03_2018");
@@ -66,7 +69,6 @@ public class InstrumentAPITest {
 	@Test
 	public void testInstrumentPRIME() {
 		InstrumentAPI api = InstrumentAPI.INSTANCE;
-		api.clearAll();
 		api.AddInstrument("PRIME", "PB_03_2018", LocalDate.of(2018, 3, 14), LocalDate.of(2018, 3, 18), "LME_PB",
 				"Lead 13 March 2018", Boolean.FALSE);
 		Instrument i = api.GetInstrument("PRIME", "PB_03_2018");
