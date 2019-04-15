@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * <li>Tradeable Rule for implementing the requirement that <b>We trust/use the
+ * <li>TradeingDate Rule for implementing the requirement that <b>We trust/use the
  * last trading date and delivery date from the LME exchange over that of
- * PRIME.s</b>
+ * PRIME</b>
  * <li>Ideally we should be able to build rule from configuration which can be
  * applied to certain targets
  * <li>Rule can be of target and update property from source
