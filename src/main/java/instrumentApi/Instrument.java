@@ -88,6 +88,16 @@ public final class Instrument {
 		return tradeable;
 	}
 
+	public Instrument withTradeable(Boolean tradeable) {
+		return new Instrument(this.getSource(), this.getInstrumentCode(), this.getLastTradingDate(),
+				this.getDeliveryDate(), this.getMarket(), this.getLabel(), tradeable);
+	}
+
+	public Instrument withLastTradingDateAndDeliveryDate(LocalDate lastTradingDate, LocalDate deliveryDate) {
+		return new Instrument(this.getSource(), this.getInstrumentCode(), lastTradingDate, deliveryDate,
+				this.getMarket(), this.getLabel(), this.getTradeable());
+	}
+
 	@Override
 	public String toString() {
 		return String.format(FORAMT_STRING, lastTradingDate.format(dateFormatter), deliveryDate.format(dateFormatter),

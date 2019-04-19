@@ -4,12 +4,13 @@ import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.concurrent.ExecutionException;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class InstrumentAPITest {
-	
+
 	@Before
 	public void setUp() throws Exception {
 		InstrumentAPI api = InstrumentAPI.INSTANCE;
@@ -52,6 +53,20 @@ public class InstrumentAPITest {
 		api.AddInstrument(new Instrument("PRIME", "PB_03_2018", LocalDate.of(2018, 3, 14), LocalDate.of(2018, 3, 18),
 				"LME_PB", "Lead 13 March 2018", Boolean.FALSE));
 		String result = api.PublishInstrument("PRIME", "PB_03_2018");
+		System.out.println(result);
+		assertEquals("| 15-03-2018 | 17-03-2018 | LME_PB | Lead 13 March 2018 | FALSE |", result);
+	}
+
+	@Test
+	public void testStory22Async() throws InterruptedException, ExecutionException {
+		InstrumentAPI api = InstrumentAPI.INSTANCE;
+		api.RegisterRule(new TradingDateRule(Collections.emptyList()));
+		api.RegisterRule(new TradeableRule(Collections.emptyList()));
+		api.AddInstrument(new Instrument("LME", "PB_03_2018", LocalDate.of(2018, 3, 15), LocalDate.of(2018, 3, 17),
+				"LME_PB", "Lead 13 March 2018"));
+		api.AddInstrument(new Instrument("PRIME", "PB_03_2018", LocalDate.of(2018, 3, 14), LocalDate.of(2018, 3, 18),
+				"LME_PB", "Lead 13 March 2018", Boolean.FALSE));
+		String result = api.PublishInstrumentAsync("PRIME", "PB_03_2018").get();
 		System.out.println(result);
 		assertEquals("| 15-03-2018 | 17-03-2018 | LME_PB | Lead 13 March 2018 | FALSE |", result);
 	}

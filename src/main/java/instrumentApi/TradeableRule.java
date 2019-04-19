@@ -15,6 +15,7 @@ public final class TradeableRule implements MergeRule {
 	// for future use for which sources this rule should be applied for for time
 	// being it is always for LME
 	private final HashSet<String> targetSources = new HashSet<String>();
+
 	/**
 	 * 
 	 * @param targetSources
@@ -42,9 +43,7 @@ public final class TradeableRule implements MergeRule {
 			InstrumentAPI api = InstrumentAPI.INSTANCE;
 			Instrument prime = api.GetInstrument("PRIME", instrument.getInstrumentCode());
 			if (prime != null) {
-				return new Instrument(instrument.getSource(), instrument.getInstrumentCode(),
-						instrument.getLastTradingDate(), instrument.getDeliveryDate(), instrument.getMarket(),
-						instrument.getLabel(), prime.getTradeable());
+				return instrument.withTradeable(prime.getTradeable());
 			}
 		}
 		return instrument;

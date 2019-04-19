@@ -1,7 +1,9 @@
 package instrumentApi;
 
 import java.time.LocalDate;
+
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -76,6 +78,18 @@ public final class InstrumentAPI {
 			return i.toString();
 		}
 		return null;
+	}
+
+	/**
+	 * Async version of PublishInstrument assuming if publish instrument takes a lot
+	 * of time, we can provide similar functions for others.
+	 * 
+	 * @param source
+	 * @param instrumentCode
+	 * @return a future supplier calling get on that you can get value
+	 */
+	public CompletableFuture<String> PublishInstrumentAsync(final String source, final String instrumentCode) {
+		return CompletableFuture.supplyAsync(() -> PublishInstrument(source, instrumentCode));
 	}
 
 	public void RegisterRule(MergeRule rule) {
