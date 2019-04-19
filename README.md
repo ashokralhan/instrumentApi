@@ -24,7 +24,7 @@ InstrumentAPI by Ashok Ralhan
  * You can add rule which will be applied before publishing. Presently no facility to remove rules.
  * For now rules are applied only while publishing in future we can have add two types of rules while saving the instrument or while publishing
  * Rules can be applied to selected source or all source
- * There is a <b>PublishInstrumentAsync</b> for PublishInstrument syn version. assuming that PublishInstrument takes alot of time. Similar Asyn version can be provided for all time consuming functions.
+ * There is a <b>PublishInstrumentAsync</b> for PublishInstrument sync version. assuming that PublishInstrument takes alot of time. Similar Async version can be provided for all time consuming functions.
 
  ## MergeRule
  * Merge Rule is Unary Operator which given an instrument will update the instrument according to given rules.
